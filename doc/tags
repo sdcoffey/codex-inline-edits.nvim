@@ -1,0 +1,5 @@
+codex-commands	codex.txt	/*codex-commands*
+codex-configuration	codex.txt	/*codex-configuration*
+codex-contents	codex.txt	/*codex-contents*
+codex-keymaps	codex.txt	/*codex-keymaps*
+codex.nvim	codex.txt	/*codex.nvim*

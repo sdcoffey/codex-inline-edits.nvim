@@ -1,0 +1,20 @@
+{
+  "name": "codex-neovim",
+  "version": "1.0.0",
+  "description": "A Neovim plugin for inline, selection-based editing with Codex.",
+  "type": "module",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "codex:bridge": "node bridge/codex-bridge.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openai/codex-sdk": "^0.91.0"
+  }
+}

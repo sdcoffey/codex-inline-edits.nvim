@@ -1,0 +1,38 @@
+*codex.nvim* Inline editing of visual selections with Codex
+
+===============================================================================
+CONTENTS                                                    *codex-contents*
+
+1. Commands.................................................|codex-commands|
+2. Keymaps...................................................|codex-keymaps|
+3. Configuration.........................................|codex-configuration|
+
+===============================================================================
+COMMANDS                                                    *codex-commands*
+
+:CodexEditSelection
+    Edit the current (or most recent) visual selection.
+
+===============================================================================
+KEYMAPS                                                      *codex-keymaps*
+
+codex.nvim does not define default keymaps.
+
+Example:
+
+    lua vim.keymap.set("v", "<leader>cr", "<cmd>CodexEditSelection<cr>")
+
+===============================================================================
+CONFIGURATION                                          *codex-configuration*
+
+Call:
+
+    lua require("codex").setup({ ... })
+
+The default SDK backend requires running: `npm install`
+
+Selection editing can be configured via the `selection_edit` section.
+
+See README.md for the full configuration table.
+
+vim:tw=78:ts=8:noet:ft=help:norl:
