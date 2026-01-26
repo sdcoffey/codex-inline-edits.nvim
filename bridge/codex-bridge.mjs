@@ -61,9 +61,10 @@ async function handleRun(request) {
   const touchedFiles = new Set();
   let finalResponse = "";
   let threadId = thread.id || request.threadId || null;
+  const runOptions = request.model ? { model: request.model } : {};
 
   try {
-    const { events } = await thread.runStreamed(request.input, {});
+    const { events } = await thread.runStreamed(request.input, runOptions);
     for await (const event of events) {
       if (event.type === "thread.started") {
         threadId = event.thread_id;

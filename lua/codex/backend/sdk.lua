@@ -300,6 +300,7 @@ function M._pump()
     threadId = next_item.thread_id,
     cwd = next_item.cwd,
     input = next_item.input,
+    model = next_item.model,
     threadOptions = next_item.thread_options,
   }
 
@@ -331,16 +332,19 @@ end
 function M.send_message(session, message, callbacks)
   callbacks = callbacks or {}
 
+  local backend = backend_config()
   local session_id = session.id
   local thread_id = session.thread_id
   local cwd = session.root or state.root
   local thread_options = build_thread_options(session)
+  local model = backend.model
 
   table.insert(queue, {
     session_id = session_id,
     thread_id = thread_id,
     cwd = cwd,
     input = message.content,
+    model = model,
     thread_options = thread_options,
     callbacks = callbacks,
     touched = {},

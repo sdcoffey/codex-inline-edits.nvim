@@ -21,6 +21,7 @@ local default_config = {
     cwd = plugin_root,
     env = {},
     codex_path = nil,
+    model = nil,
     thread_options = {
       sandboxMode = "workspace-write",
       skipGitRepoCheck = true,

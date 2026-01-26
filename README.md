@@ -52,6 +52,7 @@ require("codex").setup({
     cwd = "/path/to/codex.nvim",
     env = {},
     codex_path = nil,
+    model = "gpt-5.2-codex",
     thread_options = {
       sandboxMode = "workspace-write",
       skipGitRepoCheck = true,

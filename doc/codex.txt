@@ -32,6 +32,7 @@ Call:
 The default SDK backend requires running: `npm install`
 
 Selection editing can be configured via the `selection_edit` section.
+The model can be configured via `backend.model`.
 
 See README.md for the full configuration table.
 
