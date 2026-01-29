@@ -1,8 +1,4 @@
-local util = require("codex.util")
-
 local M = {}
-
-local plugin_root = util.plugin_root()
 
 local default_config = {
   selection_edit = {
@@ -17,12 +13,10 @@ local default_config = {
     debounce_ms = 200,
   },
   backend = {
-    cmd = { "node", plugin_root .. "/bridge/codex-bridge.mjs" },
-    cwd = plugin_root,
     env = {},
     codex_path = nil,
     model = nil,
-    thread_options = {
+    codex_options = {
       sandboxMode = "workspace-write",
       skipGitRepoCheck = true,
       approvalPolicy = "on-request",

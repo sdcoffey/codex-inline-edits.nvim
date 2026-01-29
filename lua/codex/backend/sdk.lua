@@ -4,6 +4,10 @@ local util = require("codex.util")
 
 local M = {}
 
+local plugin_root = util.plugin_root()
+local bridge_cmd = { "node", plugin_root .. "/bridge/codex-bridge.mjs" }
+local bridge_cwd = plugin_root
+
 local job_id = nil
 local running = false
 local pending = nil
@@ -42,11 +46,11 @@ local function merged_env()
   return env
 end
 
-local function build_thread_options(session)
+local function build_codex_options(session)
   local backend = backend_config()
-  local thread_options = vim.deepcopy(backend.thread_options or {})
-  thread_options.workingDirectory = session.root or state.root
-  return thread_options
+  local codex_options = vim.deepcopy(backend.codex_options or {})
+  codex_options.workingDirectory = session.root or state.root
+  return codex_options
 end
 
 local function ensure_job()
@@ -54,17 +58,10 @@ local function ensure_job()
     return true
   end
 
-  local backend = backend_config()
-  local cmd = backend.cmd
-  if not cmd or #cmd == 0 then
-    notify("codex.nvim: backend.cmd is not configured", vim.log.levels.ERROR)
-    return false
-  end
-
   stdout_buffer = ""
 
-  job_id = vim.fn.jobstart(cmd, {
-    cwd = backend.cwd,
+  job_id = vim.fn.jobstart(bridge_cmd, {
+    cwd = bridge_cwd,
     env = merged_env(),
     stdout_buffered = false,
     stderr_buffered = false,
@@ -301,7 +298,7 @@ function M._pump()
     cwd = next_item.cwd,
     input = next_item.input,
     model = next_item.model,
-    threadOptions = next_item.thread_options,
+    threadOptions = next_item.codex_options,
   }
 
   if not send_request(request) then
@@ -336,7 +333,7 @@ function M.send_message(session, message, callbacks)
   local session_id = session.id
   local thread_id = session.thread_id
   local cwd = session.root or state.root
-  local thread_options = build_thread_options(session)
+  local codex_options = build_codex_options(session)
   local model = backend.model
 
   table.insert(queue, {
@@ -345,7 +342,7 @@ function M.send_message(session, message, callbacks)
     cwd = cwd,
     input = message.content,
     model = model,
-    thread_options = thread_options,
+    codex_options = codex_options,
     callbacks = callbacks,
     touched = {},
   })

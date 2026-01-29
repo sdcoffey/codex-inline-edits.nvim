@@ -48,12 +48,10 @@ require("codex").setup({
     debounce_ms = 200,
   },
   backend = {
-    cmd = { "node", "/path/to/codex.nvim/bridge/codex-bridge.mjs" },
-    cwd = "/path/to/codex.nvim",
     env = {},
     codex_path = nil,
     model = "gpt-5.2-codex",
-    thread_options = {
+    codex_options = {
       sandboxMode = "workspace-write",
       skipGitRepoCheck = true,
       approvalPolicy = "on-request",
